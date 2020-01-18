@@ -6,6 +6,10 @@ app.config["DEBUG"] = True
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
+    return vegetation_description()
+
+@app.route('/vegetation-cover', methods=['GET'])
+def vegetation_description():
+    return "<h1>GeoTIFF's Information API</h1><p>Calculates vegetation cover and some geographical information for a given file in the server (preexisting).</p>"
 
 app.run()
