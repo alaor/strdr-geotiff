@@ -13,6 +13,7 @@ dataset = rasterio.open(path)
 
 @app.route('/', methods=['GET'])
 def home():
+    vegetationCover()
     centroid()
     return vegetation_cover()
 
@@ -41,8 +42,17 @@ def centroid():
     longs, lats = transform(p1, p1.to_latlong(), eastings, northings)
     long = longs.sum() / longs.size
     lat = lats.sum() / lats.size
-    print("LONG: {}".format((longs.sum() / longs.size)))
-    print("LATS: {}".format((lats.sum() / lats.size)))
+    print("LONG: {}".format(long))
+    print("LAT: {}".format(lat))
 
+
+def vegetationCover():
+    # ref: https://www.hatarilabs.com/ih-en/ndvi-calculation-from-landsat8-images-with-python-3-and-rasterio-tutorial
+    # ref: http://www.loicdutrieux.net/pyLandsat/NDVI_calc.html
+    RED = dataset.read(3).astype('float64')
+    NIR = dataset.read(4).astype('float64')
+    # Or can we use np.seterr(divide='ignore', invalid='ignore') and eliminate the need of using astype('float64')
+    NDVI = np.where((RED+NIR)==0., 0, (NIR-RED)/(NIR+RED))  # 0.49715062845406466
+    print("Vegetation Cover Percentage: {}".format((NDVI.sum() / NDVI.size)))  # 0.4985692579352882
 
 app.run()
