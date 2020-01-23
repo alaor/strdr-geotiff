@@ -1,0 +1,8 @@
+Flask
+rasterio
+numpy
+Affine
+Proj
+transform
+connexion
+uwsgi
