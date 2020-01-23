@@ -2,7 +2,6 @@ affine==2.3.0
 arrow==0.15.5
 asn1crypto==0.24.0
 attrs==19.3.0
-catfish==1.4.4
 certifi==2019.11.28
 chardet==3.0.4
 Click==7.0
