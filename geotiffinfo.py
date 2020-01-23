@@ -3,7 +3,7 @@ import numpy as np
 from affine import Affine
 from pyproj import Proj, transform
 
-path = r"../sources/analytic.tif"
+path = r"sources/analytic.tif"
 dataset = rasterio.open(path)
 
 
