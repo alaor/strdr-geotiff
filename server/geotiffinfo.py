@@ -1,31 +1,10 @@
-import flask
 import rasterio
 import numpy as np
 from affine import Affine
 from pyproj import Proj, transform
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = True
-
-path = "../sources/analytic.tif"
+path = r"../sources/analytic.tif"
 dataset = rasterio.open(path)
-
-
-@app.route('/', methods=['GET'])
-def home():
-    return "<h1>GeoTIFF's Information API</h1><p>Calculates vegetation cover and some geographical information for a given file in the server (preexisting).</p>" \
-           "<p>The information is available on localhost:5000/vegetation-cover.</p>"
-
-
-@app.route('/vegetation-cover', methods=['GET'])
-def vegetation_cover():
-    return {
-        "filename": filename(),
-        "cover": vegetationCover(),
-        "area": area(),
-        "centroid": centroid(),
-        "local_time": "TODO"
-    }
 
 
 def centroid():
@@ -47,7 +26,7 @@ def centroid():
     longs, lats = transform(p1, p1.to_latlong(), eastings, northings)
     long = longs.sum() / longs.size
     lat = lats.sum() / lats.size
-    return {"coordinates": [long, lat]}
+    return {"coordinates": [lat, long]}
 
 
 def vegetationCover():
@@ -56,16 +35,15 @@ def vegetationCover():
     RED = dataset.read(3).astype('float64')
     NIR = dataset.read(4).astype('float64')
     # Or can we use np.seterr(divide='ignore', invalid='ignore') and eliminate the need of using astype('float64')
-    NDVI = np.where((RED+NIR)==0., 0, (NIR-RED)/(NIR+RED))  # 0.49715062845406466
+    NDVI = np.where((RED + NIR) == 0., 0, (NIR - RED) / (NIR + RED))  # 0.49715062845406466
     return NDVI.sum() / NDVI.size  # 0.4985692579352882
+
 
 def area():
     width = dataset.bounds[2] - dataset.bounds[0]
     height = dataset.bounds[3] - dataset.bounds[1]
     return width * height
 
+
 def filename():
     return dataset.name
-
-
-app.run()
