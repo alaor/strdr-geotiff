@@ -1,5 +1,6 @@
 from connexion.resolver import RestyResolver
 import connexion
+import os
 
 app = connexion.App(__name__, specification_dir='./')
 app.add_api("swagger_api.yml")
@@ -10,5 +11,6 @@ def home():
            u"information for a given file in the server (preexisting).</p>" \
            "<p>The information is available on localhost:5000/vegetation-cover.</p>"
 
-
-app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
