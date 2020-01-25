@@ -1,9 +1,9 @@
 import rasterio
-import rasterio.features
-import rasterio.warp
 import numpy as np
 from affine import Affine
 from pyproj import Proj, transform
+import os
+import datetime
 
 path = r"sources/analytic.tif"
 dataset = rasterio.open(path)
@@ -51,4 +51,14 @@ def area():
 
 
 def filename():
+    # I'm not sure about it, I think the name is 319567_2331703_2016-12-07_0c0b-20161207T151953Z.tif, right?
+    # Which I supppose to find it in the image metadata, but I haven't figured out how to do.
     return dataset.name
+
+
+def localTime():
+    # I'm not sure about it too, can't find a solution to read tags like
+    # TIFFTAG_DATETIME or DateTimeOriginal from metadata.
+    # I've tried to use libraries like gdal, exifread, pillow but no success ... :(
+    return datetime.datetime.fromtimestamp(os.path.getctime(path)).isoformat()
+

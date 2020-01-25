@@ -7,5 +7,5 @@ def infos():
         "cover": info.vegetationCover(),
         "area": info.area(),
         "centroid": info.centroid(),
-        "local_time": "TODO"
+        "local_time": info.localTime()
     }
