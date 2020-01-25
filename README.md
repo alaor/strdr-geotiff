@@ -51,8 +51,7 @@ Após a instalação, basta que execute o seguinte comando na raíz do projeto:
 
 Tudo certo? :+1:
 
-Ahh.. :bulb: já ia me esquecendo! :grimacing: Foram desenvolvidos alguns testes para garantir que a API funcione como o esperado
-e também para validar o deploy da mesma no Heroku. A execução dos testes é feita através do comando:
+Ahh.. :bulb: já ia me esquecendo! :grimacing: Foram desenvolvidos alguns testes para garantir que a API funcione como esperado e também para validar o deploy da mesma no Heroku. A execução dos testes é feita através do comando:
 
 - pytest
 
@@ -60,7 +59,7 @@ Para executar apenas o teste da API no Heroku, execute:
 
 - pytest test_api_heroku.py
 
-**Agora sim! Tudo pronto!** :raised_hands: O acesso a API pode ser feito através de duas formas:
+**Agora sim! Tudo pronto!** :raised_hands: O acesso a API pode ser feito de duas formas:
 
 - http://localhost:5000 :house:
 - https://alaor-strdr.herokuapp.com/ :cloud:
