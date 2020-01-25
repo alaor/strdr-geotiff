@@ -1,0 +1,9 @@
+Flask==1.1.1
+rasterio==1.1.2
+numpy==1.18.1
+affine==2.3.0
+proj==0.1.0
+Transform==0.0.1
+connexion==2.5.1
+pyproj==2.4.2.post1
+swagger-ui-bundle==0.0.6

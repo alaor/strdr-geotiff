@@ -1,4 +1,4 @@
-import server.geotiffinfo as info
+import geotiffinfo as info
 
 
 def infos():
